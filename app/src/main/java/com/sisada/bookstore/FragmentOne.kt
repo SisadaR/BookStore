@@ -5,9 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 
 
 class FragmentOne : Fragment() {
+
+    private  lateinit var gridView : GridView
+    var topList : MutableList<Int> = mutableListOf(
+        R.drawable.top_one,
+        R.drawable.top_two,
+        R.drawable.top_three,
+        R.drawable.top_four,
+        R.drawable.top_five,
+        R.drawable.top_six,
+        R.drawable.top_seven,
+        R.drawable.top_eight,
+        R.drawable.top_nine,
+        R.drawable.top_ten, R.drawable.top_one,
+        R.drawable.top_two,
+        R.drawable.top_three,
+        R.drawable.top_four,
+        R.drawable.top_five,
+        R.drawable.top_six,
+        R.drawable.top_seven,
+        R.drawable.top_eight,
+        R.drawable.top_nine,
+        R.drawable.top_ten)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +43,9 @@ class FragmentOne : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_one, container, false)
-
+        gridView = view.findViewById<GridView>(R.id.grid_view)
+        val adapter = TopListAdapter(topList,context!!)
+        gridView.adapter = adapter
         return view
     }
 
