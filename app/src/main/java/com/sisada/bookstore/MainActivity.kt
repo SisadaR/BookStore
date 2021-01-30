@@ -3,8 +3,11 @@ package com.sisada.bookstore
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager.widget.ViewPager
@@ -18,13 +21,22 @@ class MainActivity : AppCompatActivity() {
 
 //    private lateinit var viewPager : ViewPager
 //    private lateinit var tabLayout : TabLayout
-    private lateinit var drawerLayout : DrawerLayout
+//    private lateinit var drawerLayout : DrawerLayout
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+        setSupportActionBar(binding.toolbar)
+        val actionBar : ActionBar? = supportActionBar
+        actionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_menu)
+        }
 
         val pageAdapter = MyPagerAdapter(supportFragmentManager, lifecycle)
         binding.viewPager.adapter = pageAdapter
@@ -51,26 +63,26 @@ class MainActivity : AppCompatActivity() {
 //            setHomeAsUpIndicator(R.drawable.ic_menu)
 //        }
 //
-//        val navigationView : NavigationView = findViewById(R.id.navigation_view)
-//
-//        navigationView.setNavigationItemSelectedListener {
-//
-//            menuItem ->
-//            when(menuItem.itemId){
-//                R.id.profile ->{
+        val navigationView : NavigationView = findViewById(R.id.navigation_view)
+
+        navigationView.setNavigationItemSelectedListener {
+
+            menuItem ->
+            when(menuItem.itemId){
+                R.id.profile ->{
 //                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
 //                    startActivity(intent)
-//                }
-//                R.id.about ->{
-//                    val intent = Intent(this@MainActivity, AboutActivity::class.java)
-//                    startActivity(intent)
-//                }
-//            }
-//
-//            drawerLayout.closeDrawers()
-//            true
-//
-//        }
+                }
+                R.id.about ->{
+                    val intent = Intent(this@MainActivity, AboutActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+
+            binding.drawerLayout.closeDrawers()
+            true
+
+        }
 //
 //        viewPager = findViewById(R.id.view_pager)
 //        tabLayout = findViewById(R.id.tab_layout)
@@ -82,5 +94,17 @@ class MainActivity : AppCompatActivity() {
 //        tabLayout.setupWithViewPager(viewPager)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        return when (item?.itemId){
+            android.R.id.home -> {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
+
+    }
 
 }
