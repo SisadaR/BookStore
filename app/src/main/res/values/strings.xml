@@ -3,4 +3,6 @@
     <string name="str_click">click</string>
     <string name="str_text_view">my name is Bita</string>
     <string name="str_button_is_clicked">It has been clicked!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

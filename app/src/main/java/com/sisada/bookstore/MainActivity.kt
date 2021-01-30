@@ -6,21 +6,40 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.sisada.bookstore.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewPager : ViewPager
-    private lateinit var tabLayout : TabLayout
+//    private lateinit var viewPager : ViewPager
+//    private lateinit var tabLayout : TabLayout
     private lateinit var drawerLayout : DrawerLayout
 
-
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val pageAdapter = MyPagerAdapter(supportFragmentManager, lifecycle)
+        binding.viewPager.adapter = pageAdapter
+
+        //https://stackoverflow.com/questions/55372259/how-to-use-tablayout-with-viewpager2-in-android
+        TabLayoutMediator(binding.tabLayout, binding.viewPager)
+        { tab, position -> // Styling each tab here
+            when(position){
+                0 -> {tab.text = "ONE"}
+                1 -> {tab.text = "TWO"}
+                2 -> {tab.text = "THREE"}
+                else -> {tab.text = "$position"}
+            }
+
+        }.attach()
 
 //        drawerLayout = findViewById(R.id.drawer_layout)
 //        setSupportActionBar(findViewById(R.id.toolbar))
