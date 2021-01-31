@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
             menuItem ->
             when(menuItem.itemId){
                 R.id.profile ->{
-//                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
-//                    startActivity(intent)
+                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.about ->{
                     val intent = Intent(this@MainActivity, AboutActivity::class.java)
