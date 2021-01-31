@@ -19,9 +19,6 @@ import com.sisada.bookstore.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var viewPager : ViewPager
-//    private lateinit var tabLayout : TabLayout
-//    private lateinit var drawerLayout : DrawerLayout
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
