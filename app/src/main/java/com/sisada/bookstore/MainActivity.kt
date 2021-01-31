@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -95,6 +96,11 @@ class MainActivity : AppCompatActivity() {
 
         return when (item?.itemId){
             android.R.id.home -> {
+                val sharedPreferences = this.getSharedPreferences(ProfileActivity.SHARED_PREF, Context.MODE_PRIVATE)
+                val firstName = sharedPreferences.getString(ProfileActivity.FIRST_NAME,"")
+                val lastname = sharedPreferences.getString(ProfileActivity.LAST_NAME,"")
+
+                binding.navigationView.findViewById<TextView>(R.id.full_name).text = "$firstName $lastname"
                 binding.drawerLayout.openDrawer(GravityCompat.START)
                 true
             }
